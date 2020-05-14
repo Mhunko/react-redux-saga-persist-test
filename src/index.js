@@ -15,13 +15,7 @@ import {sagaWatcher} from "./redux/sagas";
 //import {store, persistor} from './redux/configureStore'
 
 
-//const saga = createSagaMiddleware()
-
-
-//import { createStore } from 'redux'
-
-
-//import rootReducer from './reducers'
+const saga = createSagaMiddleware()
 
 const persistConfig = {
     key: 'root',
@@ -31,19 +25,15 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 
-let store = createStore(persistedReducer)
-let persistor = persistStore(store)
-//return { store, persistor }
-
-
-/*const store = createStore(rootReducer, compose(
+let store = createStore(persistedReducer, compose(
     applyMiddleware(
         thunk, forbiddenWordsMiddleware, saga
     ),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-))*/
+))
+let persistor = persistStore(store)
 
-//saga.run(sagaWatcher)
+saga.run(sagaWatcher)
 
 const app = (
     <Provider store={store}>
